@@ -8,9 +8,6 @@
     "mocha": true
   },
   "globals": {
-    "app": true,
-    "prompt": true,
-    "$": true,
-    "document": true
+    "angular": true
   }
 }
