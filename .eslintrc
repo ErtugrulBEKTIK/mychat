@@ -9,6 +9,7 @@
   },
   "globals": {
     "angular": true,
-    "app": true
+    "app": true,
+    "io": true
   }
 }
