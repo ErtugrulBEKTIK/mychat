@@ -1,0 +1,13 @@
+{
+  "name": "my-chat",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Ertuğrul BEKTİK <E.Bektik@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ErtugrulBEKTIK/mychat",
+  "dependencies": {
+    "angular": "^1.7.6"
+  }
+}
