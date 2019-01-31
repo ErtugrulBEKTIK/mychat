@@ -10,6 +10,7 @@
   "globals": {
     "angular": true,
     "app": true,
+    "window": true,
     "io": true
   }
 }

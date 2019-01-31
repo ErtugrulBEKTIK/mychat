@@ -22,7 +22,7 @@ block content
                 ng-repeat="room in roomList",
                 ng-click="switchRoom(room)"
                 )
-                  span.name {{ room.name }}
+                  span.name {{ room.roomName }}
 
             .tab-right(ng-show="activeTab === 2")
               ul.people
@@ -31,11 +31,11 @@ block content
                   span.name {{ user.meta.name }} {{ user.meta.surname }}
                   span.preview &nbsp;
           .bottom
-            button New Group
-        .right
+            button(ng-click="newRoom()") New Room
+        .right(ng-if="chatClicked")
           .top
             span
-              span.name Dog Woofson
+              span.name {{ chatName }}
           .chat.active-chat
             .bubble.you
               span Hakan Aydın
