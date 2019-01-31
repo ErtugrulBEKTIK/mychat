@@ -2,7 +2,8 @@
   "extends": "rallycoding",
   "rules": {
     "import/newline-after-import": false,
-    "no-param-reassign": 0
+    "no-param-reassign": 0,
+    "no-underscore-dangle": 0
   },
   "env": {
     "mocha": true

@@ -22,7 +22,7 @@ block content
                 ng-repeat="room in roomList",
                 ng-click="switchRoom(room)"
                 )
-                  span.name {{ room.roomName }}
+                  span.name {{ room.name }}
 
             .tab-right(ng-show="activeTab === 2")
               ul.people
@@ -37,25 +37,16 @@ block content
             span
               span.name {{ chatName }}
           .chat.active-chat
-            .bubble.you
-              span Hakan Aydın
-              | Hello, can you hear me?
-            .bubble.you
-              span Hakan Aydın
-              | I'm in California dreaming
-            .bubble.me ... about who we used to be.
-            .bubble.me Are you serious?
-            .bubble.you
-              span Hakan Aydın
-              | When we were younger and free...
-            .bubble.you
-              span Hakan Aydın
-              | I've forgotten how it felt before
+            .bubble.you(ng-repeat="data in messages")
+              span {{ data.username }}
+              | {{ data.message }}
           .write
-            input(type='text')
-            a.write-link.send(href='javascript:;')
+            form(ng-submit="newMessage()")
+              input(type='text', ng-model="$parent.message")
+              a.write-link.send(ng-click="newMessage()")
 
 append javascripts
   script(src="http://localhost:3000/socket.io/socket.io.js")
+  script(src="javascripts/services/chatFactory.js")
   script(src="javascripts/controller/chatController.js")
 

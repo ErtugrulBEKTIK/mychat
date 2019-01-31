@@ -10,6 +10,7 @@ const socketApi = {
 // Libs
 const Users = require('./lib/Users');
 const Rooms = require('./lib/Rooms');
+const Messages = require('./lib/Messages');
 
 // Socket Authorization
 io.use(socketAuthorization);
@@ -42,9 +43,17 @@ io.on('connection', socket => {
   });
 
   socket.on('disconnect', () => {
-    Users.remove(socket.request.user.googleId);
+    Users.remove(socket.request.user._id);
     Users.list(users => {
       io.emit('onlineList', users);
+    });
+  });
+
+  socket.on('newMessage', (data) => {
+    console.log(data);
+    Messages.upsert({
+      ...data,
+      username: `${socket.request.user.name} ${socket.request.user.surname}`
     });
   });
 });

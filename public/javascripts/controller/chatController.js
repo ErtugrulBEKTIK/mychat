@@ -1,9 +1,12 @@
-app.controller('chatController', ['$scope', ($scope) => {
+app.controller('chatController', ['$scope', 'chatFactory', ($scope, chatFactory) => {
   $scope.onlineList = [];
   $scope.roomList = [];
   $scope.activeTab = 1;
   $scope.chatClicked = false;
-  $scope.chatName = "";
+  $scope.chatName = '';
+  $scope.roomId = '';
+  $scope.message = '';
+  $scope.messages = [];
 
   // Socket.io event handling.
 
@@ -21,8 +24,22 @@ app.controller('chatController', ['$scope', ($scope) => {
   // Angular methods
 
   $scope.switchRoom = (room) => {
-    $scope.chatName = room.roomName;
+    $scope.chatName = room.name;
+    $scope.roomId = room.id;
     $scope.chatClicked = true;
+
+    chatFactory.getMessages(room.id).then((data) => {
+      console.log(data);
+      $scope.messages = data;
+    });
+  };
+
+  $scope.newMessage = () => {
+    socket.emit('newMessage', {
+      message: $scope.message,
+      roomId: $scope.roomId,
+    });
+    $scope.message = '';
   };
 
   $scope.newRoom = () => {
