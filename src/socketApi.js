@@ -50,11 +50,15 @@ io.on('connection', socket => {
   });
 
   socket.on('newMessage', (data) => {
-    console.log(data);
-    Messages.upsert({
+    const messageData = {
       ...data,
+      userId: socket.request.user._id,
       username: `${socket.request.user.name} ${socket.request.user.surname}`
-    });
+    };
+
+    Messages.upsert(messageData);
+
+    socket.broadcast.emit('receiveMessage', messageData);
   });
 });
 
